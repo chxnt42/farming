@@ -17,5 +17,17 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raylib)
 
-add_executable(farming src/main.cpp src/utils.h src/game.cpp src/tile.cpp src/textureManager.cpp)
+include(FetchContent)
+FetchContent_Declare(
+    raygui
+    GIT_REPOSITORY https://github.com/raysan5/raygui.git
+    GIT_TAG 4.0
+)
+
+
+FetchContent_MakeAvailable(raygui)
+
+add_executable(farming src/main.cpp src/utils.h src/game.cpp src/tile.cpp src/textureManager.cpp src/ui.cpp) 
 target_link_libraries(farming PRIVATE raylib)
+
+target_include_directories(farming PRIVATE ${raygui_SOURCE_DIR}/src)

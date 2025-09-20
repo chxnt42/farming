@@ -14,6 +14,8 @@ textureManager::~textureManager()
 void textureManager::init()
 {
     textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture("./assets/dirt.png");
+    textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture("./assets/highlight.png");
+    textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture("./assets/ui_item.png");
 }
 
 Texture2D textureManager::getTexture(TextureType type)

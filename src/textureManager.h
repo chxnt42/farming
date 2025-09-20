@@ -7,6 +7,8 @@
 enum class TextureType 
 {
     DIRT_TILE,
+    HIGHLIGHT,
+    UI_ITEM,
     COUNT //make sure count is always last in the enum
 };
 
@@ -22,7 +24,7 @@ public:
     void init();
 
 private:
-    Texture2D textureArray[static_cast<int>(TextureType::COUNT)];
+    Texture2D textureArray[static_cast<int>(TextureType::COUNT) + 1];
 };
 
 #endif
