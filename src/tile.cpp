@@ -1,11 +1,11 @@
 #include "tile.h"
 
-Tile::Tile()
+
+
+
+void Tile::draw()
 {
-
-}
-
-Tile::~Tile()
-{
-
+    if(!plant){return;}
+    
+    plant->draw();
 }

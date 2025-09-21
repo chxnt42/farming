@@ -3,11 +3,19 @@
 
 #pragma once
 
+#include <memory>
+#include "plant.h"
+
+
 class Tile
 {
 public:
-    Tile();
-    ~Tile();
+    std::unique_ptr<Plant> plant;
+
+    void draw();
+    void update();
+    Tile() = default;
+
 
 private:
 

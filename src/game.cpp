@@ -21,7 +21,7 @@ void Game::init()
 
 void Game::drawTiles()
 {
-    for (auto pair : m_tiles)
+    for (const auto& pair : m_tiles)
     {
         int x_grid = pair.first.first;
         int y_grid = pair.first.second;

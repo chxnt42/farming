@@ -1,6 +1,7 @@
 
 #include <functional>
 #include <iostream>
+#include <memory>
 #include <utility>
 #include "raylib.h"
 #include "textureManager.h"
@@ -21,12 +22,13 @@ int main()
     SetTargetFPS(60);
 
     Game::instance().init();
-    Game::instance().m_tiles.insert(std::make_pair(std::make_pair(6, 6), Tile()));
+    Game::instance().m_tiles.try_emplace(std::make_pair(6, 6));
 
     Color bg_colour = {51,60,58,255};
 
-    ui::draggableContainer test1;
-    test1.bounds =  {0,0,60,60};
+    ui::draggableContainer test1({0,0,60,60});
+    test1.item = std::make_unique<ui::carrotUiItem>(&test1,Game::instance().m_textureManager->getTexture(TextureType::CARROT_ICON),2.0f);
+
 
 
     while (!WindowShouldClose())

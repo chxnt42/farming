@@ -27,7 +27,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raygui)
 
-add_executable(farming src/main.cpp src/utils.h src/game.cpp src/tile.cpp src/textureManager.cpp src/ui.cpp) 
+add_executable(farming src/main.cpp src/utils.h src/game.cpp src/tile.cpp src/textureManager.cpp src/ui.cpp src/plant.cpp) 
 target_link_libraries(farming PRIVATE raylib)
 
 target_include_directories(farming PRIVATE ${raygui_SOURCE_DIR}/src)

@@ -9,6 +9,7 @@ enum class TextureType
     DIRT_TILE,
     HIGHLIGHT,
     UI_ITEM,
+    CARROT_ICON,
     COUNT //make sure count is always last in the enum
 };
 
