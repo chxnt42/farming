@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "textureManager.h"
 #include "tile.h"
+#include <cstddef>
 #include <memory>
 
 void ui::draggableContainer::draw()
@@ -12,7 +13,7 @@ void ui::draggableContainer::draw()
 
     Texture2D UiItemTexture = manager->getTexture(TextureType::UI_ITEM);
     DrawTexturePro(UiItemTexture, {0, 0, (float)UiItemTexture.width, (float)UiItemTexture.height},
-                   {bounds.x, bounds.y, bounds.width, bounds.height}, {0,0}, 0, WHITE);
+                   {bounds.x, bounds.y, bounds.width, bounds.height}, {0, 0}, 0, WHITE);
 
     if (item)
     {
@@ -27,23 +28,17 @@ void ui::draggableContainer::onDrag()
     mousePos.y = mousePos.y - ((item->plant->plantIconTexture.height * item->scale) / 2);
 
     item->position = mousePos;
-
-
 }
 
 void ui::draggableContainer::onStartDrag()
 {
     item->onDragEnd();
-
 }
 
 void ui::draggableContainer::onStopDrag()
 {
     item->onDragEnd();
-
-    
 }
-
 
 void ui::draggableContainer::onHover()
 {
@@ -56,7 +51,7 @@ void ui::draggableContainer::update()
 
     if (CheckCollisionPointRec(mousePos, bounds))
     {
-        onHover();
+        Game::instance().drawCommandQueue.push([this]() { onHover(); });
     }
 
     // Start dragging
@@ -82,11 +77,10 @@ void ui::draggableContainer::update()
     }
 }
 
-ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent,float _scale)
+ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent, float _scale)
 {
     parentContainer = _parent;
     scale = _scale;
-
 
     if (_parent)
     {
@@ -97,40 +91,37 @@ ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent,float _scale)
 
 void ui::baseUiItem::draw()
 {
-    DrawTexturePro(
-        plant->plantIconTexture, {0, 0, (float)plant->plantIconTexture.width, (float)plant->plantIconTexture.height},      
-        {position.x, position.y, (float)plant->plantIconTexture.width * scale, (float)plant->plantIconTexture.height * scale}, 
-        {0, 0},                                                                      
-        0.0f,                                                                       
-        WHITE);
+    DrawTexturePro(plant->plantIconTexture,
+                   {0, 0, (float)plant->plantIconTexture.width, (float)plant->plantIconTexture.height},
+                   {position.x, position.y, (float)plant->plantIconTexture.width * scale,
+                    (float)plant->plantIconTexture.height * scale},
+                   {0, 0}, 0.0f, WHITE);
 }
-
-
 
 void ui::carrotUiItem::onDragEnd()
 {
     auto tileGridPos = Game::instance().getHoveredTile(GetMousePosition());
 
-    if(tileGridPos.has_value())
+    if (tileGridPos.has_value())
     {
-        Tile& tileObj = Game::instance().m_tiles[tileGridPos.value()]; //implement planting logic
+        Tile &tileObj = Game::instance().m_tiles[tileGridPos.value()]; // implement planting logic
         tileObj.plant = std::make_unique<Carrot>();
-        position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4), parentContainer->bounds.y + (parentContainer->bounds.height / 4)}; 
+        position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4),
+                    parentContainer->bounds.y + (parentContainer->bounds.height / 4)};
     }
     else
     {
-        position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4), parentContainer->bounds.y + (parentContainer->bounds.height / 4)}; //resset back to container position
+        position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4),
+                    parentContainer->bounds.y +
+                        (parentContainer->bounds.height / 4)}; // resset back to container position
     }
-
-}   
-
-
-void ui::renderPlantCard(std::unique_ptr<baseUiItem>& UIItem)
-{
-    
 }
 
-void ui::renderPlantCard(std::unique_ptr<Plant>& plantItem)
+void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
 {
-   
+    std::cout << "drawing from ui" << std::endl;
+}
+
+void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
+{
 }

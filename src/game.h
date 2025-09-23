@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "textureManager.h"
 #include <memory>
+#include <queue>
 #include <utility>
 #pragma once
 
@@ -12,6 +13,8 @@
 
 #include "tile.h"
 #include "utils.h"
+#include <functional>
+
 
 class Game
 {
@@ -24,8 +27,12 @@ class Game
     int m_screenHeight = 1080;
     int m_tileSize = 16;
     int m_tileGridOffset = (m_screenHeight / 4) * 16;
-    
+     std::queue<std::function<void()>> drawCommandQueue;
+
+
     Font primaryFont;
+
+   
 
     std::optional<std::pair<int, int>> currentHoveredTile;
 

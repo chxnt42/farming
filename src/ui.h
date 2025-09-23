@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "plant.h"
+#include <queue>
 
 
 namespace ui
