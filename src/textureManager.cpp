@@ -13,10 +13,31 @@ textureManager::~textureManager()
 
 void textureManager::init()
 {
-    textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture("../assets/dirt.png");
-    textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture("../assets/highlight.png");
-    textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture("../assets/ui_item.png");
-     textureArray[static_cast<int>(TextureType::CARROT_ICON)] = LoadTexture("../assets/carrot.png");
+    #ifdef __WIN32
+
+        
+
+    auto exePath = std::filesystem::current_path();
+    auto parent = exePath.parent_path();
+
+
+    std::filesystem::path CarrotPath = parent / "assets" / "carrot.png";
+    std::filesystem::path DirtPath = parent / "assets" / "dirt.png";
+    std::filesystem::path HightlightPath = parent / "assets" / "highlight.png";
+    std::filesystem::path UIItem = parent / "assets" / "ui_item.png";
+
+    textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture(DirtPath.c_str());
+    textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture(HightlightPath.c_str());
+    textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture(UIItem.c_str());
+    textureArray[static_cast<int>(TextureType::CARROT_ICON)] = LoadTexture(CarrotPath.c_str());
+        
+    #else
+        textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture("../assets/dirt.png");
+        textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture("../assets/highlight.png");
+        textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture("../assets/ui_item.png");
+        textureArray[static_cast<int>(TextureType::CARROT_ICON)] = LoadTexture("../assets/carrot.png");
+    #endif
+    
 }
 
 Texture2D textureManager::getTexture(TextureType type)
