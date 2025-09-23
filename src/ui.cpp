@@ -119,9 +119,20 @@ void ui::carrotUiItem::onDragEnd()
 
 void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
 {
-    std::cout << "drawing from ui" << std::endl;
+    Texture2D UiCardTexture = Game::instance().m_textureManager->getTexture(TextureType::SQAURE_CARD_BG);
+    float scale = 1.5f;
+    DrawTexturePro(UiCardTexture, { 0, 0, (float)UiCardTexture.width, (float)UiCardTexture.height },
+        { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * scale, 0, (UiCardTexture.width * 0.75f) * scale, ((float)UiCardTexture.height) * scale }, { 0,0 }, 0, WHITE);
+
+
 }
 
 void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
 {
+    Texture2D UiCardTexture = Game::instance().m_textureManager->getTexture(TextureType::SQAURE_CARD_BG);
+    float scale = 1.5f;
+    DrawTexturePro(UiCardTexture, { 0, 0, (float)UiCardTexture.width, (float)UiCardTexture.height },
+        { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * scale, 0, (UiCardTexture.width * 0.75f) * scale, ((float)UiCardTexture.height) * scale }, {0,0}, 0, WHITE);
+
+
 }

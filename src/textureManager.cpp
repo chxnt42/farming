@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include <filesystem>
 
-//#define __WIN32
+#define __WIN32
 
 textureManager::textureManager()
 {
