@@ -23,8 +23,8 @@ void ui::draggableContainer::draw()
 void ui::draggableContainer::onDrag()
 {
     auto mousePos = GetMousePosition();
-    mousePos.x = mousePos.x - ((item->itemTexture.width * item->scale) / 2);
-    mousePos.y = mousePos.y - ((item->itemTexture.height * item->scale) / 2);
+    mousePos.x = mousePos.x - ((item->plant->plantIconTexture.width * item->scale) / 2);
+    mousePos.y = mousePos.y - ((item->plant->plantIconTexture.height * item->scale) / 2);
 
     item->position = mousePos;
 
@@ -76,10 +76,9 @@ void ui::draggableContainer::update()
     }
 }
 
-ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent, Texture2D _itemTexture,float _scale)
+ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent,float _scale)
 {
     parentContainer = _parent;
-    itemTexture = _itemTexture;
     scale = _scale;
 
 
@@ -93,8 +92,8 @@ ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent, Texture2D _itemTextu
 void ui::baseUiItem::draw()
 {
     DrawTexturePro(
-        itemTexture, {0, 0, (float)itemTexture.width, (float)itemTexture.height},      
-        {position.x, position.y, (float)itemTexture.width * scale, (float)itemTexture.height * scale}, 
+        plant->plantIconTexture, {0, 0, (float)plant->plantIconTexture.width, (float)plant->plantIconTexture.height},      
+        {position.x, position.y, (float)plant->plantIconTexture.width * scale, (float)plant->plantIconTexture.height * scale}, 
         {0, 0},                                                                      
         0.0f,                                                                       
         WHITE);
@@ -122,7 +121,7 @@ void ui::carrotUiItem::onDragEnd()
 
 void ui::renderPlantCard(std::unique_ptr<baseUiItem>& UIItem)
 {
-
+    
 }
 
 void ui::renderPlantCard(std::unique_ptr<Plant>& plantItem)

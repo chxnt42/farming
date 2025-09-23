@@ -14,7 +14,7 @@ class Plant
 {
 public:
 
-
+    Texture2D plantIconTexture;
     Texture2D growthTextureSheet;
     int currentGrowthStage = 0 ; // 4th growth stage is the last texture
 
@@ -37,6 +37,9 @@ private:
 
 class Carrot : public Plant
 {
+
+    static constexpr float growth_speed = 3.0f;
+
     public:
     Carrot();
 

@@ -27,7 +27,7 @@ int main()
     Color bg_colour = {51,60,58,255};
 
     ui::draggableContainer test1({0,0,60,60});
-    test1.item = std::make_unique<ui::carrotUiItem>(&test1,Game::instance().m_textureManager->getTexture(TextureType::CARROT_ICON),2.0f);
+    test1.item = std::make_unique<ui::carrotUiItem>(&test1,2.0f);
 
 
 

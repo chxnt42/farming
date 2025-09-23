@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include <filesystem>
 
-#define __WIN32
+//#define __WIN32
 
 textureManager::textureManager()
 {
@@ -37,7 +37,7 @@ void textureManager::init()
     textureArray[static_cast<int>(TextureType::CARROT_ICON)] = LoadTexture(resolvePath("carrot.png").c_str());
     textureArray[static_cast<int>(TextureType::CARROT_SHEET)] = LoadTexture(resolvePath("carrot_sheet.png").c_str());
     textureArray[static_cast<int>(TextureType::SQAURE_CARD_BG)] = LoadTexture(resolvePath("square_card.png").c_str());
-     textureArray[static_cast<int>(TextureType::CIRCLE_CARD_ICON)] = LoadTexture(resolvePath("circle_card.png").c_str());
+    textureArray[static_cast<int>(TextureType::CIRCLE_CARD_ICON)] = LoadTexture(resolvePath("circle_card.png").c_str());
         
     #else
         textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture("../assets/dirt.png");

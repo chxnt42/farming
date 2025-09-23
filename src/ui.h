@@ -16,11 +16,13 @@ namespace ui
     class baseUiItem
     {
         public:
-        baseUiItem(draggableContainer* _parent,Texture2D _itemTexture,float _scale = 1.0f);
+        std::unique_ptr<Plant> plant;
+
+        baseUiItem(draggableContainer* _parent,float _scale = 1.0f);
 
         draggableContainer* parentContainer;
 
-        Texture2D itemTexture;
+
         Vector2 position;
 
         float scale = 1.0f;
@@ -34,15 +36,14 @@ namespace ui
     class carrotUiItem : public baseUiItem
     {
         public:
-        carrotUiItem(draggableContainer* _parent,Texture2D _itemTexture,float _scale = 1.0f) : baseUiItem(_parent,_itemTexture,_scale){};
+        carrotUiItem(draggableContainer* _parent,float _scale = 1.0f) : baseUiItem(_parent,_scale){
+            plant = std::make_unique<Carrot>();
+        };
         
         void onDragEnd() override;
+
+        
     };
-
-
-
-
-
 
 
     class draggableContainer
