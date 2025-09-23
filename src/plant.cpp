@@ -3,7 +3,3 @@
 
 
 
-void Carrot::draw() 
-{
-
-};

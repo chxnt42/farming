@@ -11,10 +11,10 @@ class Plant
 public:
     Texture2D growthTextureSheet;
     float growthspeed;
-    void draw();
+    void draw(){};
     
     void update();
-
+        
 
 
 private:
@@ -26,7 +26,6 @@ class Carrot : public Plant
 {
     public:
 
-    void draw();
     float growthspeed = 30;
 };
 
