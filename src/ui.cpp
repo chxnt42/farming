@@ -119,20 +119,52 @@ void ui::carrotUiItem::onDragEnd()
 
 void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
 {
+    // Do not change order as positions are relative
+
     Texture2D UiCardTexture = Game::instance().m_textureManager->getTexture(TextureType::SQAURE_CARD_BG);
-    float scale = 1.5f;
+    float cardScale = 1.5f;
+    Vector2 cardPosition = { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * cardScale , 0 };
     DrawTexturePro(UiCardTexture, { 0, 0, (float)UiCardTexture.width, (float)UiCardTexture.height },
-        { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * scale, 0, (UiCardTexture.width * 0.75f) * scale, ((float)UiCardTexture.height) * scale }, { 0,0 }, 0, WHITE);
+        { cardPosition.x, cardPosition.y, (UiCardTexture.width * 0.75f) * cardScale, ((float)UiCardTexture.height) * cardScale }, { 0,0 }, 0, WHITE);
 
+    Texture2D UiCircleTexture = Game::instance().m_textureManager->getTexture(TextureType::CIRCLE_CARD_ICON);
+    Vector2 circlePosition = { cardPosition.x + 10, cardPosition.y + 10 };
+    DrawTexturePro(UiCircleTexture, { 0, 0, (float)UiCircleTexture.width, (float)UiCircleTexture.height },
+        { circlePosition.x, circlePosition.y, ((float)UiCircleTexture.width), ((float)UiCircleTexture.height) }, { 0,0 }, 0, WHITE);
 
+    if (UIItem != nullptr)
+    {
+        Texture2D UiPlantTexture = UIItem->plant->plantIconTexture;
+        float plantScale = 2.0f;
+        Vector2 plantPosition = { circlePosition.x + (UiCircleTexture.width - UiPlantTexture.width * plantScale) / 2,
+                                  circlePosition.y + (UiCircleTexture.height - UiPlantTexture.height * plantScale) / 2 };
+        DrawTexturePro(UiPlantTexture, { 0, 0, (float)UiPlantTexture.width, (float)UiPlantTexture.height },
+            { plantPosition.x, plantPosition.y, ((float)UiPlantTexture.width) * plantScale, ((float)UiPlantTexture.height) * plantScale }, { 0,0 }, 0, WHITE);
+    }
 }
 
 void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
 {
+    // Do not change order as positions are relative
+
     Texture2D UiCardTexture = Game::instance().m_textureManager->getTexture(TextureType::SQAURE_CARD_BG);
-    float scale = 1.5f;
+    float cardScale = 1.5f;
+    Vector2 cardPosition = { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * cardScale , 0 };
     DrawTexturePro(UiCardTexture, { 0, 0, (float)UiCardTexture.width, (float)UiCardTexture.height },
-        { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * scale, 0, (UiCardTexture.width * 0.75f) * scale, ((float)UiCardTexture.height) * scale }, {0,0}, 0, WHITE);
+        { cardPosition.x, cardPosition.y, (UiCardTexture.width * 0.75f) * cardScale, ((float)UiCardTexture.height) * cardScale }, {0,0}, 0, WHITE);
 
+    Texture2D UiCircleTexture = Game::instance().m_textureManager->getTexture(TextureType::CIRCLE_CARD_ICON);
+    Vector2 circlePosition = {cardPosition.x + 10, cardPosition.y + 10};
+    DrawTexturePro(UiCircleTexture, { 0, 0, (float)UiCircleTexture.width, (float)UiCircleTexture.height },
+        { circlePosition.x, circlePosition.y, ((float)UiCircleTexture.width), ((float)UiCircleTexture.height) }, { 0,0 }, 0, WHITE);
 
+    if(plantItem != nullptr)
+    {
+        Texture2D UiPlantTexture = plantItem->plantIconTexture;
+        float plantScale = 2.0f;
+        Vector2 plantPosition = { circlePosition.x + (UiCircleTexture.width - UiPlantTexture.width * plantScale) / 2,
+                                  circlePosition.y + (UiCircleTexture.height - UiPlantTexture.height * plantScale) / 2 };
+        DrawTexturePro(UiPlantTexture, { 0, 0, (float)UiPlantTexture.width, (float)UiPlantTexture.height },
+            { plantPosition.x, plantPosition.y, ((float)UiPlantTexture.width) * plantScale, ((float)UiPlantTexture.height) * plantScale }, { 0,0 }, 0, WHITE);
+    }
 }

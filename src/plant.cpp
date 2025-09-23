@@ -9,9 +9,10 @@
 
 Carrot::Carrot()
 {
+    plantName = "Carrot";
     plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::CARROT_ICON);
     growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::CARROT_SHEET);
-    growthspeed = 2;
+    growthSpeed = 2;
 }
 
 
@@ -24,7 +25,7 @@ void Plant::update()
 {
     float currentTime = GetTime();
 
-    if(currentTime - lastUpdateTime >= growthspeed) 
+    if(currentTime - lastUpdateTime >= growthSpeed) 
     {
         if(currentGrowthStage + 1 <= 4)
         {

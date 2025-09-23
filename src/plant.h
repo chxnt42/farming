@@ -14,15 +14,14 @@ class Plant
 {
 public:
 
+    std::string plantName;
+
     Texture2D plantIconTexture;
     Texture2D growthTextureSheet;
     int currentGrowthStage = 0 ; // 4th growth stage is the last texture
 
-
-
-    float growthspeed;
+    float growthSpeed;
     float lastUpdateTime;
-
 
     bool grown = false;
     void draw(const std::pair<int,int>& gridPos);
@@ -37,8 +36,8 @@ private:
 
 class Carrot : public Plant
 {
-
-    static constexpr float growth_speed = 3.0f;
+    // What does this do? Ive commented it out for now
+    //static constexpr float growth_speed = 3.0f;
 
     public:
     Carrot();
