@@ -15,12 +15,12 @@ textureManager::~textureManager()
 }
 
 
-const char* resolvePath(const char *pngName)
+std::string resolvePath(const char *pngName)
 {
     auto exePath = std::filesystem::current_path();
     auto parent = exePath.parent_path().parent_path().parent_path();
     std::filesystem::path tempPath = parent / "assets" / pngName;
-    return static_cast<const char*>(tempPath.c_str());
+    return tempPath.string();
 }
 
 
@@ -30,17 +30,14 @@ void textureManager::init()
 
         
 
-    auto exePath = std::filesystem::current_path();
-    auto parent = exePath.parent_path().parent_path().parent_path();
 
-
-    textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture(resolvePath("dirt.png"));
-    textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture(resolvePath("highlight.png"));
-    textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture(resolvePath("ui_item.png"));
-    textureArray[static_cast<int>(TextureType::CARROT_ICON)] = LoadTexture(resolvePath("carrot.png"));
-    textureArray[static_cast<int>(TextureType::CARROT_SHEET)] = LoadTexture(resolvePath("carrot_sheet.png"));
-    textureArray[static_cast<int>(TextureType::SQAURE_CARD_BG)] = LoadTexture(resolvePath("square_card.png"));
-     textureArray[static_cast<int>(TextureType::CIRCLE_CARD_ICON)] = LoadTexture(resolvePath("circle_card.png"));
+    textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture(resolvePath("dirt.png").c_str());
+    textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture(resolvePath("highlight.png").c_str());
+    textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture(resolvePath("ui_item.png").c_str());
+    textureArray[static_cast<int>(TextureType::CARROT_ICON)] = LoadTexture(resolvePath("carrot.png").c_str());
+    textureArray[static_cast<int>(TextureType::CARROT_SHEET)] = LoadTexture(resolvePath("carrot_sheet.png").c_str());
+    textureArray[static_cast<int>(TextureType::SQAURE_CARD_BG)] = LoadTexture(resolvePath("square_card.png").c_str());
+     textureArray[static_cast<int>(TextureType::CIRCLE_CARD_ICON)] = LoadTexture(resolvePath("circle_card.png").c_str());
         
     #else
         textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture("../assets/dirt.png");

@@ -22,7 +22,7 @@ enum class TextureType
 };
 
 
-const char* resolvePath(const char* pngName);
+std::string resolvePath(const char* pngName);
 
 class textureManager
 {
