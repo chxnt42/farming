@@ -44,6 +44,12 @@ void ui::draggableContainer::onStopDrag()
     
 }
 
+
+void ui::draggableContainer::onHover()
+{
+    ui::renderPlantCard(item);
+}
+
 void ui::draggableContainer::update()
 {
     Vector2 mousePos = GetMousePosition();
@@ -126,5 +132,5 @@ void ui::renderPlantCard(std::unique_ptr<baseUiItem>& UIItem)
 
 void ui::renderPlantCard(std::unique_ptr<Plant>& plantItem)
 {
-    
+   
 }

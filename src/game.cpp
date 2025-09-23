@@ -4,6 +4,8 @@
 #include "tile.h"
 #include <memory>
 
+#include "ui.h"
+
 Game::~Game()
 {
 }
@@ -38,6 +40,8 @@ void Game::draw()
     if(currentHoveredTile.has_value())
     {
         DrawTexture(m_textureManager->getTexture(TextureType::HIGHLIGHT), currentHoveredTile.value().first * m_tileSize, currentHoveredTile.value().second * m_tileSize,WHITE);
+
+        ui::renderPlantCard(m_tiles[currentHoveredTile.value()].plant);
     }
         
 }

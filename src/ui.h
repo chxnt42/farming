@@ -66,7 +66,7 @@ namespace ui
         virtual void onDrag();
         virtual void onStopDrag();
         
-        void onHover() {};
+        void onHover();
         
 
         void update();
