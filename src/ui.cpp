@@ -110,6 +110,7 @@ void ui::carrotUiItem::onDragEnd()
     {
         Tile& tileObj = Game::instance().m_tiles[tileGridPos.value()]; //implement planting logic
         tileObj.plant = std::make_unique<Carrot>();
+        position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4), parentContainer->bounds.y + (parentContainer->bounds.height / 4)}; 
     }
     else
     {
@@ -117,3 +118,14 @@ void ui::carrotUiItem::onDragEnd()
     }
 
 }   
+
+
+void ui::renderPlantCard(std::unique_ptr<baseUiItem>& UIItem)
+{
+
+}
+
+void ui::renderPlantCard(std::unique_ptr<Plant>& plantItem)
+{
+    
+}

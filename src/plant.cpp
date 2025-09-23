@@ -1,5 +1,38 @@
 #include "plant.h"
+#include "game.h"
+#include "raylib.h"
+#include "textureManager.h"
+#include <iostream>
 
 
 
 
+Carrot::Carrot()
+{
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::CARROT_SHEET);
+    growthspeed = 2;
+}
+
+
+void Plant::draw(const std::pair<int,int>& gridPos)
+{
+    DrawTexturePro(growthTextureSheet,{(float)currentGrowthStage * 16,0,16,16},{(float)gridPos.first * 16,(float)gridPos.second*16,16,16},{0,0},0,WHITE);
+}
+
+void Plant::update()
+{
+    float currentTime = GetTime();
+
+    if(currentTime - lastUpdateTime >= growthspeed) 
+    {
+        if(currentGrowthStage + 1 <= 4)
+        {
+            currentGrowthStage++;
+            lastUpdateTime = currentTime;
+        }
+        else 
+        {
+            grown = true;
+        }
+    }
+}

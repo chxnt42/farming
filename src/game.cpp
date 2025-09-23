@@ -17,17 +17,17 @@ void Game::init()
     cam.zoom = 2.0f;
     cam.rotation = 0.0f;
     cam.target = {0,0};
+
 }
 
 void Game::drawTiles()
 {
-    for (const auto& pair : m_tiles)
+    for (auto& pair : m_tiles)
     {
-        int x_grid = pair.first.first;
-        int y_grid = pair.first.second;
 
-        DrawTexture(m_textureManager->getTexture(TextureType::DIRT_TILE), x_grid * m_tileSize, y_grid * m_tileSize,
-                    WHITE);
+
+        pair.second.draw(pair.first);
+
     }
 }
 
@@ -65,5 +65,14 @@ std::optional<std::pair<int, int>> Game::getHoveredTile(Vector2 mousePos)
 void Game::update()
 {
     currentHoveredTile = getHoveredTile(GetMousePosition());
+
+    for (auto& pair : m_tiles)
+    {
+
+
+        pair.second.update();
+
+    }
+
 }
 

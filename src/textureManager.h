@@ -15,9 +15,14 @@ enum class TextureType
     HIGHLIGHT,
     UI_ITEM,
     CARROT_ICON,
+    CARROT_SHEET,
+    SQAURE_CARD_BG,
+    CIRCLE_CARD_ICON,
     COUNT //make sure count is always last in the enum
 };
 
+
+const char* resolvePath(const char* pngName);
 
 class textureManager
 {

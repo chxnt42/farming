@@ -24,6 +24,8 @@ class Game
     int m_screenHeight = 1080;
     int m_tileSize = 16;
     int m_tileGridOffset = (m_screenHeight / 4) * 16;
+    
+    Font primaryFont;
 
     std::optional<std::pair<int, int>> currentHoveredTile;
 
