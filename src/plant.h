@@ -23,18 +23,19 @@ public:
     {
         JUICY,
         REFRESHING,
-        HEALING,
-        MIND_CLEARING
+        AWAKENING,
+        MIND_CLEARING,
+        HEALING
     };
 
 
     enum class NegativeEffects 
     {
-        PARALYSIS,
+        SHOCKING,
+        BURNING,
         SADNESS,
         TOXIC,
-        ELECTRIC,
-        FLAMMABLE
+        PARALYSIS
     };
 
     Plant(std::vector<int> positiveEffects = {},std::vector<int> negativeEffects = {});
@@ -70,15 +71,15 @@ public:
     static const std::string& getPositiveEffectName(PositiveEffects effect);
     static const std::string& getNegativeEffectName(NegativeEffects effect);
 
-    static  int getPositiveEffectValue(PositiveEffects effect);
-    static  int getNegativeEffectValue(NegativeEffects effect);
+    static int getPositiveEffectValue(PositiveEffects effect);
+    static int getNegativeEffectValue(NegativeEffects effect);
 
 private:
     static const std::unordered_map<PositiveEffects, std::string> positiveEffectNames;
-    static const std::unordered_map<NegativeEffects, std::string> negativeffectNames;
+    static const std::unordered_map<NegativeEffects, std::string> negativeEffectNames;
 
     static const std::unordered_map<PositiveEffects, int> positiveEffectValues;
-    static const std::unordered_map<NegativeEffects, int> negativeffectValues;
+    static const std::unordered_map<NegativeEffects, int> negativeEffectValues;
 
 };
 

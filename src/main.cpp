@@ -32,7 +32,7 @@ int main()
     test1.item->plant->addEffect(Plant::PositiveEffects::HEALING);
     test1.item->plant->addEffect(Plant::PositiveEffects::JUICY);
 
-    test1.item->plant->addEffect(Plant::NegativeEffects::FLAMMABLE);
+    test1.item->plant->addEffect(Plant::NegativeEffects::BURNING);
 
 
 

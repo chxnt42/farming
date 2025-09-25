@@ -10,32 +10,34 @@
 const std::unordered_map<Plant::PositiveEffects, std::string> Plant::positiveEffectNames = {
     {PositiveEffects::JUICY, "Juicy"},
     {PositiveEffects::REFRESHING, "Refreshing"},
-    {PositiveEffects::HEALING, "Healing"},
-    {PositiveEffects::MIND_CLEARING, "Mind Clearing"}
+    {PositiveEffects::AWAKENING, "Awakening"},
+    {PositiveEffects::MIND_CLEARING, "Mind Clearing"},
+    {PositiveEffects::HEALING, "Healing"}
 };
 
-const std::unordered_map<Plant::NegativeEffects, std::string> Plant::negativeffectNames = {
-    {NegativeEffects::PARALYSIS, "Paralysis"},
+const std::unordered_map<Plant::NegativeEffects, std::string> Plant::negativeEffectNames = {
+    {NegativeEffects::SHOCKING, "Shocking"},
+    {NegativeEffects::BURNING, "Burning"},
     {NegativeEffects::SADNESS, "Sadness"},
     {NegativeEffects::TOXIC, "Toxic"},
-    {NegativeEffects::ELECTRIC, "Electric"},
-    {NegativeEffects::FLAMMABLE, "Flammable"}
+    {NegativeEffects::PARALYSIS, "Paralysis"}
 };
 
 
 const std::unordered_map<Plant::PositiveEffects, int> Plant::positiveEffectValues = {
-    {PositiveEffects::JUICY, 10},
-    {PositiveEffects::REFRESHING, 20},
-    {PositiveEffects::HEALING, 30},
-    {PositiveEffects::MIND_CLEARING, 40},
+    {PositiveEffects::JUICY, 5},
+    {PositiveEffects::REFRESHING, 10},
+    {PositiveEffects::AWAKENING, 20},
+    {PositiveEffects::MIND_CLEARING, 30},
+    {PositiveEffects::HEALING, 40}
 };
 
-const std::unordered_map<Plant::NegativeEffects, int> Plant::negativeffectValues = {
-    {NegativeEffects::PARALYSIS, -30},
+const std::unordered_map<Plant::NegativeEffects, int> Plant::negativeEffectValues = {
+    {NegativeEffects::SHOCKING, -5},
+    {NegativeEffects::BURNING, -10},
     {NegativeEffects::SADNESS, -20},
-    {NegativeEffects::TOXIC, -25},
-    {NegativeEffects::ELECTRIC, -5},
-    {NegativeEffects::FLAMMABLE, -10}
+    {NegativeEffects::TOXIC, -30},
+    {NegativeEffects::PARALYSIS, -40}
 };
 
 
@@ -52,7 +54,7 @@ const std::string& Plant::getPositiveEffectName(PositiveEffects effect) {
 }
 
 const std::string& Plant::getNegativeEffectName(NegativeEffects effect) {
-    return negativeffectNames.at(effect);
+    return negativeEffectNames.at(effect);
 }
 
 
@@ -61,7 +63,7 @@ int Plant::getPositiveEffectValue(PositiveEffects effect) {
 }
 
 int Plant::getNegativeEffectValue(NegativeEffects effect) {
-    return negativeffectValues.at(effect);
+    return negativeEffectValues.at(effect);
 }
 
 
