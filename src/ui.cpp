@@ -42,7 +42,7 @@ void ui::draggableContainer::onStopDrag()
 
 void ui::draggableContainer::onHover()
 {
-    ui::renderPlantCard(item);
+    ui::renderPlantCard(item->plant);
 }
 
 void ui::draggableContainer::update()
@@ -117,38 +117,21 @@ void ui::carrotUiItem::onDragEnd()
     }
 }
 
-void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
-{
-    // Do not change order as positions are relative
-
-    Texture2D UiCardTexture = Game::instance().m_textureManager->getTexture(TextureType::SQAURE_CARD_BG);
-    float cardScale = 1.5f;
-    Vector2 cardPosition = { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * cardScale , 0 };
-    DrawTexturePro(UiCardTexture, { 0, 0, (float)UiCardTexture.width, (float)UiCardTexture.height },
-        { cardPosition.x, cardPosition.y, (UiCardTexture.width * 0.75f) * cardScale, ((float)UiCardTexture.height) * cardScale }, { 0,0 }, 0, WHITE);
-
-    Texture2D UiCircleTexture = Game::instance().m_textureManager->getTexture(TextureType::CIRCLE_CARD_ICON);
-    Vector2 circlePosition = { cardPosition.x + 10, cardPosition.y + 10 };
-    DrawTexturePro(UiCircleTexture, { 0, 0, (float)UiCircleTexture.width, (float)UiCircleTexture.height },
-        { circlePosition.x, circlePosition.y, ((float)UiCircleTexture.width), ((float)UiCircleTexture.height) }, { 0,0 }, 0, WHITE);
-
-    if (UIItem != nullptr)
-    {
-        Texture2D UiPlantTexture = UIItem->plant->plantIconTexture;
-        float plantScale = 2.0f;
-        Vector2 plantPosition = { circlePosition.x + (UiCircleTexture.width - UiPlantTexture.width * plantScale) / 2,
-                                  circlePosition.y + (UiCircleTexture.height - UiPlantTexture.height * plantScale) / 2 };
-        DrawTexturePro(UiPlantTexture, { 0, 0, (float)UiPlantTexture.width, (float)UiPlantTexture.height },
-            { plantPosition.x, plantPosition.y, ((float)UiPlantTexture.width) * plantScale, ((float)UiPlantTexture.height) * plantScale }, { 0,0 }, 0, WHITE);
-    }
-}
+//void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
+//{
+//    // Do not change order as positions are relative
+//
+//    if (UIItem != nullptr)
+//    {
+//    }
+//}
 
 void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
 {
     // Do not change order as positions are relative
 
     Texture2D UiCardTexture = Game::instance().m_textureManager->getTexture(TextureType::SQAURE_CARD_BG);
-    float cardScale = 1.5f;
+    float cardScale = 1.8f;
     Vector2 cardPosition = { (float)Game::instance().m_screenWidth / Game::instance().cam.zoom - (UiCardTexture.width * 0.75f) * cardScale , 0 };
     DrawTexturePro(UiCardTexture, { 0, 0, (float)UiCardTexture.width, (float)UiCardTexture.height },
         { cardPosition.x, cardPosition.y, (UiCardTexture.width * 0.75f) * cardScale, ((float)UiCardTexture.height) * cardScale }, {0,0}, 0, WHITE);
@@ -166,5 +149,22 @@ void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
                                   circlePosition.y + (UiCircleTexture.height - UiPlantTexture.height * plantScale) / 2 };
         DrawTexturePro(UiPlantTexture, { 0, 0, (float)UiPlantTexture.width, (float)UiPlantTexture.height },
             { plantPosition.x, plantPosition.y, ((float)UiPlantTexture.width) * plantScale, ((float)UiPlantTexture.height) * plantScale }, { 0,0 }, 0, WHITE);
+
+        Vector2 nameTextPosition = { circlePosition.x + UiCircleTexture.width + 10, circlePosition.y + UiCircleTexture.height / 4 };
+        DrawTextEx(Game::instance().primaryFont, 
+            plantItem->plantName.c_str(), 
+            Vector2{ nameTextPosition.x, nameTextPosition.y }, 16, 1, WHITE);
+
+        Vector2 growthStageTextPosition = { cardPosition.x + 10, circlePosition.y + UiCircleTexture.height + 10};
+        DrawTextEx(Game::instance().primaryFont, 
+            ("Growth Stage: " + std::to_string(plantItem->currentGrowthStage)).c_str(), 
+            Vector2{growthStageTextPosition.x, growthStageTextPosition.y}, 14, 1, WHITE);
+
+        Vector2 growthSpeedTextPosition = { cardPosition.x + 10, growthStageTextPosition.y + 10 };
+        DrawTextEx(Game::instance().primaryFont,
+            ("Growth Speed: " + std::to_string((int)plantItem->growthSpeed) + "." 
+                + std::to_string((int)fmodf(plantItem->growthSpeed * 10, 10))
+                + std::to_string((int)fmodf(fmodf(plantItem->growthSpeed * 100, 100), 10))).c_str(),
+            Vector2{ growthSpeedTextPosition.x, growthSpeedTextPosition.y }, 14, 1, WHITE);
     }
 }

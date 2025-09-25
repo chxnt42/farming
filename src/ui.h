@@ -75,7 +75,7 @@ namespace ui
         
     };
 
-    void renderPlantCard(std::unique_ptr<baseUiItem>& UIItem);
+    //void renderPlantCard(std::unique_ptr<baseUiItem>& UIItem);
     void renderPlantCard(std::unique_ptr<Plant>& plantItem);
 
 

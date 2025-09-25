@@ -28,9 +28,6 @@ void textureManager::init()
 {
     #ifdef __WIN32
 
-        
-
-
     textureArray[static_cast<int>(TextureType::DIRT_TILE)] = LoadTexture(resolvePath("dirt.png").c_str());
     textureArray[static_cast<int>(TextureType::HIGHLIGHT)] = LoadTexture(resolvePath("highlight.png").c_str());
     textureArray[static_cast<int>(TextureType::UI_ITEM)] = LoadTexture(resolvePath("ui_item.png").c_str());

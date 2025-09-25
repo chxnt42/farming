@@ -6,12 +6,20 @@
 
 #include "ui.h"
 
+#define __WIN32
+
 Game::~Game()
 {
 }
 
 void Game::init()
 {
+    #ifdef __WIN32
+    primaryFont = LoadFont(resolvePath("fonts/v5loxicar.ttf").c_str());
+    #else
+    primaryFont = LoadFont("../assets/fonts/v5loxicar.ttf")
+    #endif
+
     m_textureManager = std::make_unique<textureManager>();
     m_textureManager->init();
 

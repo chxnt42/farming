@@ -12,7 +12,7 @@ Carrot::Carrot()
     plantName = "Carrot";
     plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::CARROT_ICON);
     growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::CARROT_SHEET);
-    growthSpeed = 2;
+    growthSpeed = 2.15;
 }
 
 
