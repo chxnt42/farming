@@ -6,7 +6,7 @@
 
 #include "ui.h"
 
-//#define __WIN32
+#define __WIN32
 
 Game::~Game()
 {

@@ -154,32 +154,40 @@ void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
     {
         Texture2D UiPlantTexture = plantItem->plantIconTexture;
         float plantScale = 2.0f;
-        Vector2 plantPosition = {circlePosition.x + (UiCircleTexture.width - UiPlantTexture.width * plantScale) / 2,
-                                 circlePosition.y + (UiCircleTexture.height - UiPlantTexture.height * plantScale) / 2};
-        DrawTexturePro(UiPlantTexture, {0, 0, (float)UiPlantTexture.width, (float)UiPlantTexture.height},
-                       {plantPosition.x, plantPosition.y, ((float)UiPlantTexture.width) * plantScale,
-                        ((float)UiPlantTexture.height) * plantScale},
-                       {0, 0}, 0, WHITE);
+        Vector2 plantPosition = { circlePosition.x + (UiCircleTexture.width - UiPlantTexture.width * plantScale) / 2,
+                                  circlePosition.y + (UiCircleTexture.height - UiPlantTexture.height * plantScale) / 2 };
+        DrawTexturePro(UiPlantTexture, { 0, 0, (float)UiPlantTexture.width, (float)UiPlantTexture.height },
+            { plantPosition.x, plantPosition.y, ((float)UiPlantTexture.width) * plantScale, ((float)UiPlantTexture.height) * plantScale }, { 0,0 }, 0, WHITE);
 
-        Vector2 nameTextPosition = {circlePosition.x + UiCircleTexture.width + 10,
-                                    circlePosition.y + UiCircleTexture.height / 4};
-        DrawTextEx(Game::instance().primaryFont, plantItem->plantName.c_str(),
-                   Vector2{nameTextPosition.x, nameTextPosition.y}, 16, 1, WHITE);
-
-        Vector2 growthStageTextPosition = {cardPosition.x + 10, circlePosition.y + UiCircleTexture.height + 10};
+        Vector2 nameTextPosition = { circlePosition.x + UiCircleTexture.width + 10, circlePosition.y + UiCircleTexture.height / 4 };
         DrawTextEx(Game::instance().primaryFont,
-                   ("Growth Stage: " + std::to_string(plantItem->currentGrowthStage)).c_str(),
-                   Vector2{growthStageTextPosition.x, growthStageTextPosition.y}, 14, 1, WHITE);
+            plantItem->plantName.c_str(),
+            Vector2{ nameTextPosition.x, nameTextPosition.y }, 16, 1, WHITE);
 
-        Vector2 growthSpeedTextPosition = {cardPosition.x + 10, growthStageTextPosition.y + 10};
+        Vector2 growthSpeedTextPosition = { cardPosition.x + 10,  circlePosition.y + UiCircleTexture.height + 10 };
         DrawTextEx(Game::instance().primaryFont,
-                   ("Growth Speed: " + std::to_string((int)plantItem->growthSpeed) + "." +
-                    std::to_string((int)fmodf(plantItem->growthSpeed * 10, 10)) +
-                    std::to_string((int)fmodf(fmodf(plantItem->growthSpeed * 100, 100), 10)))
-                       .c_str(),
-                   Vector2{growthSpeedTextPosition.x, growthSpeedTextPosition.y}, 14, 1, WHITE);
+            ("Growth Speed: " + std::to_string((int)plantItem->growthSpeed) + "."
+                + std::to_string((int)fmodf(plantItem->growthSpeed * 10, 10))
+                + std::to_string((int)fmodf(fmodf(plantItem->growthSpeed * 100, 100), 10))).c_str(),
+            Vector2{ growthSpeedTextPosition.x, growthSpeedTextPosition.y }, 14, 1, WHITE);
 
-        Vector2 effectTextPos = {growthSpeedTextPosition.x,growthSpeedTextPosition.y + 10};
+        Vector2 growthStageTextPosition = { cardPosition.x + 10, growthSpeedTextPosition.y + 10 };
+        DrawTextEx(Game::instance().primaryFont,
+            ("Growth Stage: " + std::to_string(plantItem->currentGrowthStage)).c_str(),
+            Vector2{ growthStageTextPosition.x, growthStageTextPosition.y }, 14, 1, WHITE);
+
+        Vector2 fullyGrownTextPosition = { cardPosition.x + 10, growthStageTextPosition.y + 10 };
+        if (plantItem->grown) {
+            DrawTextEx(Game::instance().primaryFont, ("Fully Grown: Yes"),
+                Vector2{ fullyGrownTextPosition.x, fullyGrownTextPosition.y }, 14, 1, WHITE);
+        }
+        else
+        {
+            DrawTextEx(Game::instance().primaryFont, ("Fully Grown: No"),
+                Vector2{ fullyGrownTextPosition.x, fullyGrownTextPosition.y }, 14, 1, WHITE);
+        }
+
+        Vector2 effectTextPos = { fullyGrownTextPosition.x, fullyGrownTextPosition.y + 10};
 
         for(int y = 0 ; y < plantItem->positiveEffectList.size(); y++)
         {
@@ -189,7 +197,7 @@ void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
             DrawTextEx(Game::instance().primaryFont, name.c_str(), {effectTextPos.x, effectTextPos.y + (y *12)}, 16,2, GREEN);
         }
 
-        Vector2 negativeEffectTextPos = {growthSpeedTextPosition.x,growthSpeedTextPosition.y + ((float)plantItem->positiveEffectList.size() * 17)};
+        Vector2 negativeEffectTextPos = { fullyGrownTextPosition.x, fullyGrownTextPosition.y + ((float)plantItem->positiveEffectList.size() * 17)};
 
         for(int y = 0 ; y < plantItem->negativeEffectList.size(); y++)
         {
