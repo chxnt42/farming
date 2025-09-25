@@ -79,5 +79,8 @@ namespace ui
     void renderPlantCard(std::unique_ptr<Plant>& plantItem);
 
 
+    void drawMoney();
+
+
     
 };

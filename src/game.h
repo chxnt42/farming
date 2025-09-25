@@ -23,11 +23,13 @@ class Game
     std::unordered_map<std::pair<int, int>, Tile, pairhash> m_tiles;
     Camera2D cam;
 
+    int money = 100;
+
     int m_screenWidth = 1920;
     int m_screenHeight = 1080;
     int m_tileSize = 16;
     int m_tileGridOffset = (m_screenHeight / 4) * 16;
-     std::queue<std::function<void()>> drawCommandQueue;
+    std::queue<std::function<void()>> drawCommandQueue;
 
 
     Font primaryFont;
