@@ -86,7 +86,7 @@ private:
 class Carrot : public Plant
 {
     public:
-    Carrot();
+    Carrot(std::vector<int> positiveEffects = {},std::vector<int> negativeEffects = {});
 
 };
 

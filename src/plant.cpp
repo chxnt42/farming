@@ -93,7 +93,7 @@ void Plant::addEffect(NegativeEffects negativeEffect)
     value += getPositiveEffectValue(posativeEffect);
  }
 
-Carrot::Carrot()
+Carrot::Carrot(std::vector<int> positiveEffects,std::vector<int> negativeEffects) : Plant(positiveEffects,negativeEffects) 
 {
     plantName = "Carrot";
     plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::CARROT_ICON);

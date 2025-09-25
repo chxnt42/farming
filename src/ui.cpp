@@ -107,7 +107,7 @@ void ui::carrotUiItem::onDragEnd()
     if (tileGridPos.has_value())
     {
         Tile &tileObj = Game::instance().m_tiles[tileGridPos.value()]; // implement planting logic
-        tileObj.plant = std::make_unique<Carrot>();
+        tileObj.plant = std::make_unique<Carrot>(plant->positiveEffectList,plant->negativeEffectList);
         position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4),
                     parentContainer->bounds.y + (parentContainer->bounds.height / 4)};
     }
