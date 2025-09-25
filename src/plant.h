@@ -50,7 +50,7 @@ public:
     int currentGrowthStage = 0 ; // 4th growth stage is the last texture
 
     float growthSpeed;
-    float lastUpdateTime;
+    float lastUpdateTime = 0;
 
     int value;
 

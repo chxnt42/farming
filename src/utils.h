@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <vector>
+#include <raylib.h>
 
 struct vectorHash
 {
@@ -23,3 +24,14 @@ struct pairhash
         return std::hash<T>()(x.first) ^ std::hash<U>()(x.second);
     }
 };
+
+
+
+template<typename... Args, typename Func>
+	float timeFunction(Args&&... args, Func&& func)
+	{
+		float startTime = GetTime();
+		func(std::forward<Args>(args)...);
+		float endTime = GetTime();
+		return endTime - startTime;
+	}
