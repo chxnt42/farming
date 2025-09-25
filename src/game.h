@@ -1,19 +1,28 @@
 #ifndef GAME_H
 #define GAME_H
-#include "raylib.h"
-#include "textureManager.h"
 #include <memory>
 #include <queue>
 #include <utility>
-#pragma once
-
+#include <vector>
 #include <memory.h>
 #include <optional>
 #include <unordered_map>
+#include <functional>
+#pragma once
 
+
+#include "raylib.h"
+#include "textureManager.h"
 #include "tile.h"
 #include "utils.h"
-#include <functional>
+
+
+namespace ui {
+    class draggableContainer; // Forward declaration only
+}
+
+
+
 
 
 class Game
@@ -31,6 +40,8 @@ class Game
     int m_tileGridOffset = (m_screenHeight / 4) * 16;
     std::queue<std::function<void()>> drawCommandQueue;
 
+    std::vector<std::shared_ptr<ui::draggableContainer>> Inventory;
+
 
     Font primaryFont;
 
@@ -45,6 +56,9 @@ class Game
     }
 
     void draw();
+    void drawUI();
+
+    
     void update();
 
     void init();

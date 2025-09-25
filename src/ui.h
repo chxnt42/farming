@@ -12,6 +12,9 @@
 namespace ui
 {
 
+
+   
+
     class draggableContainer;
 
     class baseUiItem
@@ -47,13 +50,24 @@ namespace ui
     };
 
 
+
+    class sweatPeaUiItem : public baseUiItem
+    {
+        public:
+        sweatPeaUiItem(draggableContainer* _parent,float _scale = 1.0f) : baseUiItem(_parent,_scale){
+            plant = std::make_unique<Sweetpea>();
+        };
+        
+        void onDragEnd() override;
+
+        
+    };
+
+
     class draggableContainer
     {
         public:
-        draggableContainer(Rectangle _bounds)
-        {
-            bounds = _bounds;
-        }
+        draggableContainer(Rectangle _bounds);
 
 
         std::unique_ptr<baseUiItem> item;

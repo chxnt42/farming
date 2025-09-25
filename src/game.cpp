@@ -4,9 +4,9 @@
 #include "tile.h"
 #include <memory>
 
-#include "ui.h"
+#include "ui.h" // Now we can include it here
 
-#define __WIN32
+//#define __WIN32
 
 Game::~Game()
 {
@@ -27,6 +27,14 @@ void Game::init()
     cam.zoom = 2.0f;
     cam.rotation = 0.0f;
     cam.target = {0, 0};
+
+
+    for(int i = 0 ; i < 10 ; i++)
+    {
+        Inventory.push_back(std::make_shared<ui::draggableContainer>(Rectangle{(float)700 + (i * 60),1080 - 60,60,60}));
+    }
+
+    
 }
 
 void Game::drawTiles()
@@ -56,6 +64,16 @@ void Game::draw()
     }
 
     ui::drawMoney();
+    
+}
+
+
+void Game::drawUI()
+{
+    for(auto& inventoryButton : Inventory)
+    {
+        inventoryButton->draw();
+    }
 }
 
 std::optional<std::pair<int, int>> Game::getHoveredTile(Vector2 mousePos)

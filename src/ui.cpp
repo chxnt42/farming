@@ -4,11 +4,11 @@
 #include "raylib.h"
 #include "textureManager.h"
 #include "tile.h"
+#include "utils.h"
 #include <cmath>
 #include <cstddef>
 #include <memory>
 #include <string>
-#include "utils.h"
 
 void ui::draggableContainer::draw()
 {
@@ -101,14 +101,21 @@ void ui::baseUiItem::draw()
                    {0, 0}, 0.0f, WHITE);
 }
 
-void ui::carrotUiItem::onDragEnd()
+
+ui::draggableContainer::draggableContainer(Rectangle _bounds)
+{
+    bounds = _bounds;
+}
+
+ template<typename T>
+void plantItem(std::unique_ptr<Plant>& plant,ui::draggableContainer* parentContainer,Vector2& position)
 {
     auto tileGridPos = Game::instance().getHoveredTile(GetMousePosition());
 
     if (tileGridPos.has_value())
     {
         Tile &tileObj = Game::instance().m_tiles[tileGridPos.value()]; // implement planting logic
-        tileObj.plant = std::make_unique<Carrot>(plant->positiveEffectList,plant->negativeEffectList);
+        tileObj.plant = std::make_unique<T>(plant->positiveEffectList, plant->negativeEffectList);
         position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4),
                     parentContainer->bounds.y + (parentContainer->bounds.height / 4)};
     }
@@ -118,6 +125,17 @@ void ui::carrotUiItem::onDragEnd()
                     parentContainer->bounds.y +
                         (parentContainer->bounds.height / 4)}; // resset back to container position
     }
+}
+
+void ui::carrotUiItem::onDragEnd()
+{
+    plantItem<Carrot>(plant, parentContainer,position);
+}
+
+
+void ui::sweatPeaUiItem::onDragEnd()
+{
+    plantItem<Sweetpea>(plant,parentContainer,position);
 }
 
 // void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
@@ -189,29 +207,32 @@ void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
 
         Vector2 effectTextPos = { fullyGrownTextPosition.x, fullyGrownTextPosition.y + 10};
 
-        for(int y = 0 ; y < plantItem->positiveEffectList.size(); y++)
+        for (int y = 0; y < plantItem->positiveEffectList.size(); y++)
         {
-            const auto& posativeEffect = plantItem->positiveEffectList[y];
-            auto& name  = Plant::getPositiveEffectName(static_cast<Plant::PositiveEffects>(posativeEffect));
+            const auto &posativeEffect = plantItem->positiveEffectList[y];
+            auto &name = Plant::getPositiveEffectName(static_cast<Plant::PositiveEffects>(posativeEffect));
 
-            DrawTextEx(Game::instance().primaryFont, name.c_str(), {effectTextPos.x, effectTextPos.y + (y *12)}, 16,2, GREEN);
+            DrawTextEx(Game::instance().primaryFont, name.c_str(), {effectTextPos.x, effectTextPos.y + (y * 12)}, 16, 2,
+                       GREEN);
         }
 
         Vector2 negativeEffectTextPos = { fullyGrownTextPosition.x, fullyGrownTextPosition.y + ((float)plantItem->positiveEffectList.size() * 17)};
 
-        for(int y = 0 ; y < plantItem->negativeEffectList.size(); y++)
+        for (int y = 0; y < plantItem->negativeEffectList.size(); y++)
         {
-            const auto& negativeEffect = plantItem->negativeEffectList[y];
-            auto& name  = Plant::getNegativeEffectName(static_cast<Plant::NegativeEffects>(negativeEffect));
+            const auto &negativeEffect = plantItem->negativeEffectList[y];
+            auto &name = Plant::getNegativeEffectName(static_cast<Plant::NegativeEffects>(negativeEffect));
 
-            DrawTextEx(Game::instance().primaryFont, name.c_str(), {negativeEffectTextPos.x, negativeEffectTextPos.y + (y *12)}, 16,2, RED);
+            DrawTextEx(Game::instance().primaryFont, name.c_str(),
+                       {negativeEffectTextPos.x, negativeEffectTextPos.y + (y * 12)}, 16, 2, RED);
         }
-
     }
 }
 
 void ui::drawMoney()
 {
-    DrawTextEx(Game::instance().primaryFont, ("$" + std::to_string(Game::instance().money)).c_str(), {100, 0}, 16,
-               1, GREEN);
+    DrawTextEx(Game::instance().primaryFont, ("$" + std::to_string(Game::instance().money)).c_str(), {100, 0}, 16, 1,
+               GREEN);
 }
+
+
