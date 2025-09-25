@@ -91,4 +91,11 @@ class Carrot : public Plant
 
 };
 
+class Sweetpea : public Plant
+{
+public:
+    Sweetpea(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+
+};
+
 #endif

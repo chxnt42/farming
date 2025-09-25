@@ -103,6 +103,14 @@ Carrot::Carrot(std::vector<int> positiveEffects,std::vector<int> negativeEffects
     growthSpeed = 2.15;
 }
 
+Sweetpea::Sweetpea(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Sweetpea";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::SWEETPEA_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::SWEETPEA_SHEET);
+    growthSpeed = 2.15;
+}
+
 
 void Plant::draw(const std::pair<int,int>& gridPos)
 {
