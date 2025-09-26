@@ -8,7 +8,7 @@
 
 #include "ui.h" // Now we can include it here
 
-// #define __WIN32
+#define __WIN32
 
 Game::~Game()
 {
@@ -35,6 +35,8 @@ void Game::init()
         Inventory.push_back(
             std::make_shared<ui::draggableContainer>(Rectangle{(float)700 + (i * 60), 1080 - 60, 60, 60}));
     }
+    Inventory.at(0)->item = std::make_unique<ui::baseUiItem>(&*Inventory.at(0), 2.0f);
+    Inventory.at(0)->item->plant = ui::PlantFactory::createPlant(Plant::PlantType::PUMPKIN);
 }
 
 void Game::drawTiles()

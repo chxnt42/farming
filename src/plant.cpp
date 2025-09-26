@@ -209,10 +209,10 @@ void Plant::update()
         {
             currentGrowthStage++;
             lastUpdateTime = currentTime;
-        }
-        else 
-        {
-            grown = true;
+            if(currentGrowthStage == 4)
+            {
+                grown = true;
+            }
         }
     }
 }

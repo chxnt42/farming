@@ -29,7 +29,7 @@ int main()
 
     ui::draggableContainer test1({0,0,60,60});
     test1.item = std::make_unique<ui::baseUiItem>(&test1,2.0f);
-    test1.item->plant = ui::PlantFactory::createPlant(Plant::PlantType::CABBAGE);
+    test1.item->plant = ui::PlantFactory::createPlant(Plant::PlantType::BUTTERCUP);
     test1.item->plant->addEffect(Plant::PositiveEffects::HEALING);
     test1.item->plant->addEffect(Plant::PositiveEffects::JUICY);
     test1.item->plant->addEffect(Plant::NegativeEffects::BURNING);
