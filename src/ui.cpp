@@ -22,6 +22,8 @@ void ui::draggableContainer::draw()
     {
         item->draw();
     }
+
+
 }
 
 void ui::draggableContainer::onDrag()
@@ -45,7 +47,13 @@ void ui::draggableContainer::onStopDrag()
 
 void ui::draggableContainer::onHover()
 {
-    ui::renderPlantCard(item->plant);
+    if(item) // fixed crash
+    {
+        if(item->plant)
+        {
+            ui::renderPlantCard(item->plant);
+        }
+    }
 }
 
 void ui::draggableContainer::update()
@@ -80,8 +88,12 @@ void ui::draggableContainer::update()
     }
 }
 
-ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent, float _scale)
+ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent, float _scale,Plant::PlantType type)
 {
+    plantType = type;
+
+    plant = std::move(ui::PlantFactory::createPlant(plantType));
+
     parentContainer = _parent;
     scale = _scale;
 
@@ -90,6 +102,10 @@ ui::baseUiItem::baseUiItem(ui::draggableContainer *_parent, float _scale)
         position = {_parent->bounds.x + (_parent->bounds.width / 4), _parent->bounds.y + (_parent->bounds.height / 4)};
         int t = 0;
     }
+
+
+
+
 }
 
 void ui::baseUiItem::draw()
@@ -107,15 +123,15 @@ ui::draggableContainer::draggableContainer(Rectangle _bounds)
     bounds = _bounds;
 }
 
- template<typename T>
-void plantItem(std::unique_ptr<Plant>& plant,ui::draggableContainer* parentContainer,Vector2& position)
+
+void ui::baseUiItem::onDragEnd()
 {
     auto tileGridPos = Game::instance().getHoveredTile(GetMousePosition());
 
     if (tileGridPos.has_value())
     {
         Tile &tileObj = Game::instance().m_tiles[tileGridPos.value()]; // implement planting logic
-        tileObj.plant = std::make_unique<T>(plant->positiveEffectList, plant->negativeEffectList);
+        tileObj.plant = std::make_unique<Plant>(*plant); //copy
         position = {parentContainer->bounds.x + (parentContainer->bounds.width / 4),
                     parentContainer->bounds.y + (parentContainer->bounds.height / 4)};
     }
@@ -127,25 +143,6 @@ void plantItem(std::unique_ptr<Plant>& plant,ui::draggableContainer* parentConta
     }
 }
 
-void ui::carrotUiItem::onDragEnd()
-{
-    plantItem<Carrot>(plant, parentContainer,position);
-}
-
-
-void ui::sweatPeaUiItem::onDragEnd()
-{
-    plantItem<Sweetpea>(plant,parentContainer,position);
-}
-
-// void ui::renderPlantCard(std::unique_ptr<baseUiItem> &UIItem)
-//{
-//     // Do not change order as positions are relative
-//
-//     if (UIItem != nullptr)
-//     {
-//     }
-// }
 
 void ui::renderPlantCard(std::unique_ptr<Plant> &plantItem)
 {

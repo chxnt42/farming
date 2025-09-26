@@ -101,6 +101,7 @@ Carrot::Carrot(std::vector<int> positiveEffects,std::vector<int> negativeEffects
     plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::CARROT_ICON);
     growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::CARROT_SHEET);
     growthSpeed = 2.15;
+    value = 10;
 }
 
 Sweetpea::Sweetpea(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
@@ -108,6 +109,87 @@ Sweetpea::Sweetpea(std::vector<int> positiveEffects, std::vector<int> negativeEf
     plantName = "Sweetpea";
     plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::SWEETPEA_ICON);
     growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::SWEETPEA_SHEET);
+    growthSpeed = 2.15;
+}
+
+
+Squash::Squash(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Squash";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::SQUASH_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::SQUASH_SHEET);
+    growthSpeed = 2.15;
+}
+
+Lettuce::Lettuce(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Lettuce";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::LETTUCE_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::LETTUCE_SHEET);
+    growthSpeed = 2.15;
+}
+
+Orange::Orange(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Orange";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::ORANGE_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::ORANGE_SHEET);
+    growthSpeed = 2.15;
+}
+
+Spinach::Spinach(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Spinach";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::SPINACH_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::SPINACH_SHEET);
+    growthSpeed = 2.15;
+}
+
+Blueberry::Blueberry(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Blueberry";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::BLUEBERRY_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::BLUEBERRY_SHEET);
+    growthSpeed = 2.15;
+}
+
+Pumpkin::Pumpkin(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Pumpkin";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::PUMPKIN_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::PUMPKIN_SHEET);
+    growthSpeed = 2.15;
+}
+
+Cabbage::Cabbage(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Cabbage";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::CABBAGE_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::CABBAGE_SHEET);
+    growthSpeed = 2.15;
+}
+
+Parsnip::Parsnip(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Parsnip";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::PARSNIP_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::PARSNIP_SHEET);
+    growthSpeed = 2.15;
+}
+
+Broccoli::Broccoli(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Broccoli";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::BROCCOLI_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::BROCCOLI_SHEET);
+    growthSpeed = 2.15;
+}
+
+Buttercup::Buttercup(std::vector<int> positiveEffects, std::vector<int> negativeEffects) : Plant(positiveEffects, negativeEffects)
+{
+    plantName = "Buttercup";
+    plantIconTexture = Game::instance().m_textureManager->getTexture(TextureType::BUTTERCUP_ICON);
+    growthTextureSheet = Game::instance().m_textureManager->getTexture(TextureType::BUTTERCUP_SHEET);
     growthSpeed = 2.15;
 }
 

@@ -1,12 +1,14 @@
 #include "game.h"
+#include "plant.h"
 #include "raylib.h"
 #include "textureManager.h"
 #include "tile.h"
+#include <cstddef>
 #include <memory>
 
 #include "ui.h" // Now we can include it here
 
-//#define __WIN32
+// #define __WIN32
 
 Game::~Game()
 {
@@ -14,11 +16,11 @@ Game::~Game()
 
 void Game::init()
 {
-    #ifdef __WIN32
+#ifdef __WIN32
     primaryFont = LoadFont(resolvePath("fonts/v5loxicar.ttf").c_str());
-    #else
+#else
     primaryFont = LoadFont("../assets/fonts/v5loxicar.ttf");
-    #endif
+#endif
 
     m_textureManager = std::make_unique<textureManager>();
     m_textureManager->init();
@@ -28,13 +30,11 @@ void Game::init()
     cam.rotation = 0.0f;
     cam.target = {0, 0};
 
-
-    for(int i = 0 ; i < 10 ; i++)
+    for (int i = 0; i < 10; i++)
     {
-        Inventory.push_back(std::make_shared<ui::draggableContainer>(Rectangle{(float)700 + (i * 60),1080 - 60,60,60}));
+        Inventory.push_back(
+            std::make_shared<ui::draggableContainer>(Rectangle{(float)700 + (i * 60), 1080 - 60, 60, 60}));
     }
-
-    
 }
 
 void Game::drawTiles()
@@ -51,8 +51,31 @@ void Game::draw()
 
     while (!drawCommandQueue.empty())
     {
-        drawCommandQueue.front()();
-        drawCommandQueue.pop();
+        try
+        {
+            auto &command = drawCommandQueue.front();
+            if (command)
+            {
+                std::cout << "Executing draw command..." << std::endl;
+                command();
+                std::cout << "Draw command completed." << std::endl;
+            }
+            else
+            {
+                std::cout << "Null command found in queue!" << std::endl;
+            }
+            drawCommandQueue.pop();
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << "Exception in draw command: " << e.what() << std::endl;
+            drawCommandQueue.pop(); // Remove the problematic command
+        }
+        catch (...)
+        {
+            std::cout << "Unknown exception in draw command!" << std::endl;
+            drawCommandQueue.pop();
+        }
     }
 
     if (currentHoveredTile.has_value())
@@ -64,13 +87,11 @@ void Game::draw()
     }
 
     ui::drawMoney();
-    
 }
-
 
 void Game::drawUI()
 {
-    for(auto& inventoryButton : Inventory)
+    for (auto &inventoryButton : Inventory)
     {
         inventoryButton->draw();
     }
@@ -100,7 +121,34 @@ void Game::update()
 
     for (auto &pair : m_tiles)
     {
-
         pair.second.update();
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        Inventory[i]->update();
+    }
+
+    if (currentHoveredTile.has_value() && IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+    {
+        auto gridpos = currentHoveredTile.value();
+        Tile &tile = m_tiles[gridpos];
+
+        // This now returns a copy, not moving the original
+        std::unique_ptr<Plant> plantCopy = tile.harvest();
+
+        if (plantCopy != nullptr)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (Inventory[i]->item == nullptr)
+                {
+                    auto baseUiItem = std::make_unique<ui::baseUiItem>(Inventory[i].get(), 2.0f);
+                    Inventory[i]->item = std::move(baseUiItem);
+                    Inventory[i]->item->plant = std::move(plantCopy);
+                    break; // Important: break after placing the copy
+                }
+            }
+        }
     }
 }

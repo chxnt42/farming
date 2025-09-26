@@ -1,5 +1,7 @@
 #include "tile.h"
 #include "game.h"
+#include "plant.h"
+#include <memory>
 
 
 
@@ -24,4 +26,16 @@ void Tile::update()
     {
         plant->update();
     }
+}
+
+
+std::unique_ptr<Plant> Tile::harvest() {
+    if (plant != nullptr) {
+
+        auto plantCopy = std::make_unique<Plant>(*plant);
+
+        plant = nullptr; 
+        return plantCopy;
+    }
+    return nullptr;
 }

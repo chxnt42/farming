@@ -15,6 +15,9 @@ public:
 
     void draw(const std::pair<int,int>& gridPos);
     void update();
+
+
+    std::unique_ptr<Plant> harvest();
     Tile() = default;
 
 

@@ -17,51 +17,61 @@ namespace ui
 
     class draggableContainer;
 
+
+
+    class PlantFactory {
+    public:
+        static std::unique_ptr<Plant> createPlant(Plant::PlantType type) {
+            switch(type) {
+                case Plant::PlantType::CARROT:
+                    return std::make_unique<Carrot>();
+                case Plant::PlantType::SWEETPEA:
+                    return std::make_unique<Sweetpea>();
+                case Plant::PlantType::SQUASH:
+                    return std::make_unique<Squash>();
+                case Plant::PlantType::LETTUCE:
+                    return std::make_unique<Lettuce>();
+                case Plant::PlantType::ORANGE_FRUIT:
+                    return std::make_unique<Orange>();
+                case Plant::PlantType::SPINACH:
+                    return std::make_unique<Spinach>();
+                case Plant::PlantType::BLUEBERRY:
+                    return std::make_unique<Blueberry>();
+                case Plant::PlantType::PUMPKIN:
+                    return std::make_unique<Pumpkin>();
+                case Plant::PlantType::CABBAGE:
+                    return std::make_unique<Cabbage>();
+                case Plant::PlantType::PARSNIP:
+                    return std::make_unique<Parsnip>();
+                case Plant::PlantType::BROCCOLI:
+                    return std::make_unique<Broccoli>();
+                case Plant::PlantType::BUTTERCUP:
+                    return std::make_unique<Buttercup>();
+                default:
+                    return nullptr;
+            }
+        }
+    };
+
     class baseUiItem
     {
         public:
+        Plant::PlantType plantType;
         std::unique_ptr<Plant> plant;
 
-        baseUiItem(draggableContainer* _parent,float _scale = 1.0f);
+        baseUiItem(draggableContainer* _parent,float _scale = 1.0f,Plant::PlantType type = Plant::PlantType::CARROT);
+        
+
 
         draggableContainer* parentContainer;
-
-
         Vector2 position;
-
         float scale = 1.0f;
 
         void draw();
-
-        virtual void onDragEnd(){};
+        virtual void onDragEnd();
     };
 
 
-    class carrotUiItem : public baseUiItem
-    {
-        public:
-        carrotUiItem(draggableContainer* _parent,float _scale = 1.0f) : baseUiItem(_parent,_scale){
-            plant = std::make_unique<Carrot>();
-        };
-        
-        void onDragEnd() override;
-
-        
-    };
-
-
-
-    class sweatPeaUiItem : public baseUiItem
-    {
-        public:
-        sweatPeaUiItem(draggableContainer* _parent,float _scale = 1.0f) : baseUiItem(_parent,_scale){
-            plant = std::make_unique<Sweetpea>();
-        };
-        
-        void onDragEnd() override;
-
-        
-    };
 
 
     class draggableContainer

@@ -19,6 +19,22 @@ class Plant
 public:
 
 
+    enum class PlantType {
+        CARROT,
+        SWEETPEA,
+        SQUASH,
+        LETTUCE,
+        ORANGE_FRUIT,
+        SPINACH,
+        BLUEBERRY,
+        PUMPKIN,
+        CABBAGE,
+        PARSNIP,
+        BROCCOLI,
+        BUTTERCUP
+    };
+
+
     enum class PositiveEffects 
     {
         JUICY,
@@ -36,6 +52,7 @@ public:
         SADNESS,
         TOXIC,
         PARALYSIS
+
     };
 
     Plant(std::vector<int> positiveEffects = {},std::vector<int> negativeEffects = {});
@@ -95,7 +112,56 @@ class Sweetpea : public Plant
 {
 public:
     Sweetpea(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
 
+class Squash : public Plant {
+public:
+    Squash(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Lettuce : public Plant {
+public:
+    Lettuce(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Orange : public Plant {
+public:
+    Orange(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Spinach : public Plant {
+public:
+    Spinach(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Blueberry : public Plant {
+public:
+    Blueberry(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Pumpkin : public Plant {
+public:
+    Pumpkin(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Cabbage : public Plant {
+public:
+    Cabbage(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Parsnip : public Plant {
+public:
+    Parsnip(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Broccoli : public Plant {
+public:
+    Broccoli(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
+};
+
+class Buttercup : public Plant {
+public:
+    Buttercup(std::vector<int> positiveEffects = {}, std::vector<int> negativeEffects = {});
 };
 
 #endif
